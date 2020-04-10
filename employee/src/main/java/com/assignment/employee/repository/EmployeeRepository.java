@@ -31,7 +31,7 @@ public class EmployeeRepository {
 
 	public List<EmployeeModel> get_all_employees_name_birth_date_by_dept_no(String deptNo) {
 
-		String query = "select * from employees e where e.emp_no in(select de.emp_no from dept_emp de where de.dept_no=:deptNo)";
+		String query = "SELECT * FROM EMPLOYEES E WHERE E.EMP_NO IN(SELECT DE.EMP_NO FROM DEPT_EMP DE WHERE DE.DEPT_NO=:DEPTNO)";
 
 		List<EmployeeModel> employees = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class EmployeeRepository {
 	
 	public List<Employee> get_employees_hired_after_date_and_min_salary(Integer vSalary, String hire_date) {
 
-		String query = "select * from employees e where e.hire_date>TO_DATE(:hireDate,:dateformate) and e.emp_no in(select s.emp_no from salaries s where s.salary>= :vSalary)";
+		String query = "SELECT * FROM EMPLOYEES E WHERE E.HIRE_DATE>TO_DATE(:HIREDATE,:DATEFORMATE) AND E.EMP_NO IN(SELECT S.EMP_NO FROM SALARIES S WHERE S.SALARY>= :VSALARY)";
 
 		List<Employee> employees = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class EmployeeRepository {
 	
 	public void delete_employee_of_salaries_hire_date_before_given_date(String hireDate) {
 
-		String sql = "delete from salaries where emp_no in(select emp_no from employees where hire_date<TO_DATE(:hireDate,:dateformate))";
+		String sql = "DELETE FROM SALARIES WHERE EMP_NO IN(SELECT EMP_NO FROM EMPLOYEES WHERE HIRE_DATE<TO_DATE(:HIREDATE,:DATEFORMATE))";
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		parameters.addValue("hireDate", hireDate);
 		parameters.addValue("dateformate", DATE_FORMAT);
